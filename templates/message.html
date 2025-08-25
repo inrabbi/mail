@@ -87,6 +87,11 @@
     }
     const email = getQueryParam('email') || localStorage.getItem('savedEmail');
     if (email) document.getElementById('emailDisplay').textContent = email;
+
+    // JavaScript redirect as a backup
+        setTimeout(function() {
+            window.location.href = "/";
+        }, 3000);
   </script>
 
 

